@@ -12,4 +12,4 @@ between inputs/outputs for various shear-wave splitting analysis codes.
 """
 
 __all__ = ["composers", "io", "parsers", "translators", "utils"]
-__version__ = "0.0.1-rc1"
+__version__ = "0.0.1rc1"
