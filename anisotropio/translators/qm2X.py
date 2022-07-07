@@ -60,6 +60,11 @@ def qm2mfast(events, run_dir, archive, stations, out_dir=None, run_subname=""):
         picks = picks[picks["Phase"] == "S"]
         picks = picks[picks["PickTime"] != "-1"]
 
+        # --- Filter for automatic S picks ---
+        picks["PickTime"] = picks["PickTime"].apply(
+            lambda x: obspy.UTCDateTime(x)
+        )
+
         # Add check here for any picks?
 
         # --- Find min/max pick times and use to query data from archive ---
@@ -75,8 +80,8 @@ def qm2mfast(events, run_dir, archive, stations, out_dir=None, run_subname=""):
 
         # --- For each pick, slice relevant window of data and write SAC ---
         for _, pick in picks.iterrows():
+            pick_time = pick.PickTime
             station = stations[stations["Name"] == pick.Station].squeeze()
-            pick_time = obspy.UTCDateTime(pick.PickTime)
 
             tmp_stream = stream.select(station=pick.Station)
             tmp_stream = tmp_stream.slice(
