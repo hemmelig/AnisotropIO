@@ -45,10 +45,7 @@ def qm2mfast(events, run_dir, archive, stations, out_dir=None, run_subname=""):
 
     locate_dir = pathlib.Path(run_dir) / "locate" / run_subname
 
-    if out_dir is None:
-        out_dir = pathlib.Path.cwd()
-    else:
-        out_dir = pathlib.Path(out_dir)
+    out_dir = pathlib.Path.cwd() if out_dir is None else pathlib.Path(out_dir)
 
     for _, event in events.iterrows():
         picks = _read_event_picks(event["EventID"], locate_dir)
@@ -57,10 +54,15 @@ def qm2mfast(events, run_dir, archive, stations, out_dir=None, run_subname=""):
             continue
 
         # --- Filter for automatic S picks ---
-        picks = picks[picks["Phase"] == "S"]
-        picks = picks[picks["PickTime"] != "-1"]
+        picks = picks[
+            (picks["Phase"] == "S") & (picks["PickTime"].astype(str) != "-1")
+        ]
+        if picks.empty:
+            print("No available S picks!")
+            continue
 
-        # Add check here for any picks?
+        # --- Convert picks to UTCDateTime objects ---
+        picks["PickTime"] = picks["PickTime"].apply(obspy.UTCDateTime)
 
         # --- Find min/max pick times and use to query data from archive ---
         min_time, max_time = picks["PickTime"].min(), picks["PickTime"].max()
@@ -71,17 +73,15 @@ def qm2mfast(events, run_dir, archive, stations, out_dir=None, run_subname=""):
             post_pad=1.5
         )
         stream = data.waveforms
-        print(stream[0].stats.starttime, stream[0].stats.endtime)
 
         # --- For each pick, slice relevant window of data and write SAC ---
         for _, pick in picks.iterrows():
             station = stations[stations["Name"] == pick.Station].squeeze()
-            pick_time = obspy.UTCDateTime(pick.PickTime)
 
             tmp_stream = stream.select(station=pick.Station)
             tmp_stream = tmp_stream.slice(
-                starttime=pick_time - 15,
-                endtime=pick_time + 15
+                starttime=pick.PickTime - 15,
+                endtime=pick.PickTime + 15
             )
 
             compose.mfast_sac_files(tmp_stream, event, station, out_dir)
