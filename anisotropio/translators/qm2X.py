@@ -61,8 +61,9 @@ def qm2mfast(events, run_dir, archive, stations, out_dir=None, run_subname=""):
             print("No available S picks!")
             continue
 
-        # --- Convert picks to UTCDateTime objects ---
-        picks["PickTime"] = picks["PickTime"].apply(obspy.UTCDateTime)
+        picks["PickTime"] = picks["PickTime"].apply(
+            lambda x: obspy.UTCDateTime(x)
+        )
 
         # --- Find min/max pick times and use to query data from archive ---
         min_time, max_time = picks["PickTime"].min(), picks["PickTime"].max()
