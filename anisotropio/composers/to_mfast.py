@@ -63,13 +63,11 @@ def mfast_sac_files(stream, event_info, station, output_path):
     station_header.az = str(az)
 
     # --- Build the pick information header ---
-    kt5 = "1"  # pick error - consider incorporating uncertainty from QM picks?
     pick_header = AttribDict()
-    pick_header.t0 = "15.0"
-    pick_header.kt5 = kt5
-    pick_header.kt0 = kt5
+    pick_header.t5 = "15.0"
+    pick_header.kt5 = "1"  # Pick error - incorporate uncertainty from QM picks?
     pick_header.o = obspy.UTCDateTime(event_info.DT)
-    pick_header.a = "0.0"
+    pick_header.a = "0.0"  # On review, it seems like this should be the P-pick time
 
     fname = eventid + ".{}.{}"
     output_path = output_path / eventid / station["Name"]
