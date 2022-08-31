@@ -109,6 +109,9 @@ class Archive:
         """Instantiate the Archive object."""
 
         self.archive_path = pathlib.Path(archive_path)
+        if not self.archive_path.is_dir():
+            raise errors.InvalidPathToArchive
+
         self.stations = stations["Name"]
         if archive_format:
             channels = kwargs.get("channels", "*")

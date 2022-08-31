@@ -24,6 +24,17 @@ class UnsetArchiveFormat(Exception):
         super().__init__(msg)
 
 
+class InvalidPathToArchive(Exception):
+    """
+    Custom exception to handle case where an invalid path to an archive is
+    provided.
+
+    """
+
+    def __init__(self):
+        super().__init__("The archive directory specified does not exist.")
+
+
 class InvalidArchivePathStructure(Exception):
     """
     Custom exception to handle case where an invalid Archive path structure
