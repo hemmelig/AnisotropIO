@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-This module provides functions to compose the inputs for MFAST - SAC waveform
-files, with correctly populated headers, are prepared from ObsPy Streams and
-either an ObsPy Event object, or simply a dataframe containing the event
-information.
+This module provides functions to compose the inputs for MFAST - SAC waveform files,
+with correctly populated headers, are prepared from ObsPy Streams and either an ObsPy
+Event object, or simply a dataframe containing the event information.
 
 :copyright:
-    2021--2022, AnisotropIO developers.
+    2023, AnisotropIO developers.
 :license:
     GNU General Public License, Version 3
     (https://www.gnu.org/licenses/gpl-3.0.html)

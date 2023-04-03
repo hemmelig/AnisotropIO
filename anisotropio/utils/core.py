@@ -3,7 +3,7 @@
 Module that supplies various utility functions and classes.
 
 :copyright:
-    2021--2022, AnisotropIO developers.
+    2023, AnisotropIO developers.
 :license:
     GNU General Public License, Version 3
     (https://www.gnu.org/licenses/gpl-3.0.html)
