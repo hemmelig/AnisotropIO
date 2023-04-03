@@ -3,9 +3,21 @@
   <a href="https://doi.org/XX.XXXX/zenodo.XXXXXXX">
     <img src="https://zenodo.org/badge/DOI/XX.XXXX/zenodo.XXXXXXX.svg" />
   </a>
+  <!-- Build Action -->
+  <a href="https://github.com/hemmelig/AnisotropIO">
+    <img src="https://img.shields.io/github/actions/workflow/status/hemmelig/anisotropio/build_wheels.yml?branch=main" />
+  </a>
   <!-- ReadTheDocs -->
   <a href="https://anisotropio.readthedocs.io/en/latest">
     <img src="https://readthedocs.org/projects/anisotropio/badge/?version=latest" />
+  </a>
+  <!-- PyPI -->
+  <a href="https://pypi.org/project/anisotropio/">
+    <img src="https://img.shields.io/pypi/v/anisotropio" />
+  </a>
+  <!-- Python version-->
+  <a href="https://www.python.org/downloads/release/python-380/">
+    <img src="https://img.shields.io/badge/python-3.8+-blue.svg" />
   </a>
   <!-- License -->
   <a href="https://www.gnu.org/licenses/gpl-3.0">
@@ -15,7 +27,7 @@
 
 <p align="center">
   <a href="https://seismicanisotropy.readthedocs.io/en/latest/index.html">AnisotropIO</a> is a cross-platform Python toolkit for parsing, composing, and translating between
-inputs/outputs for various shear-wave splitting analysis codes.</a>.
+inputs/outputs for various shear-wave splitting analysis codes.
 </p>
 
 <p align="center">
