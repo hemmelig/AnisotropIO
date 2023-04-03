@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Bacon
+    given-names: Conor Andrew
+    orcid: https://orcid.org/0000-0002-2558-8555
+title: "AnisotropIO"
+version: 0.0.1
+doi: XX.XXXX/zenodo.XXXXXXX
+date-released: 2023-04-02
